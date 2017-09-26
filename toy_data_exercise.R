@@ -33,7 +33,9 @@ sep_names <- clean_names %>%
   separate(Product.code...number,c("Product_code","number"),convert=TRUE)
 
 # add product categories
-product_cat <- data.frame(Product_code = c("p","v","x","q"),Product = c("Smartphone","TV","Laptop","Tablet"),stringsAsFactors = FALSE)  
+product_cat <- data.frame(Product_code = c("p","v","x","q"),
+                          Product = c("Smartphone","TV","Laptop","Tablet"),
+                          stringsAsFactors = FALSE)  
 updated_df <- left_join(sep_names,product_cat,by="Product_code")
 
 # Add full address for geocoding
