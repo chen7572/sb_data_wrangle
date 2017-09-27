@@ -2,14 +2,15 @@
 companies <- read.csv("refine_original.csv",stringsAsFactors = FALSE)
 head(companies)
 
-# load library dplyr and dummies 
+# load library tidyr, dplyr and dummies 
+library(tidyr)
 library(dplyr)
 library(dummies)
 
 # create a local data frame & view the data frame in two different ways
 companies_raw <- tbl_df(companies)
 glimpse(companies_raw)
-View(companies_raw)
+#View(companies_raw)
 
 # clean up the company names
 # step 1.take a look at all the names, including misspelled ones
@@ -46,3 +47,6 @@ updated_df <- updated_df %>% unite(full_address,address,city,country,sep=",")
 dummy1 <- dummy(updated_df$company,sep = "_")
 dummy2 <- dummy(updated_df$Product,sep="_")
 final_df <- cbind(updated_df,dummy1,dummy2)
+
+# write a csv file.
+write.csv(final_df,file="refine_clean.csv",row.names=FALSE)
